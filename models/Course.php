@@ -94,18 +94,17 @@ class Course
 		$query->bindParam(':title', $this->title, PDO::PARAM_STR);
         $query->bindParam(':description', $this->description, PDO::PARAM_STR);
 		$query->bindParam(':created_at', $this->created_at, PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->updated_at, PDO::PARAM_STR);
+        $query->bindParam(':updated_at', $this->updated_at, PDO::PARAM_STR);
         $query->execute();
     }
 
     public function update()
     {
-        $query = $this->db->prepare('UPDATE courses SET title = :title, description = :description, created_at = :created_at, updated_at = :updated_at WHERE id = :id');
+        $query = $this->db->prepare('UPDATE courses SET title = :title, description = :description, updated_at = :updated_at WHERE id = :id');
         $query->bindParam(':id', $this->id, PDO::PARAM_STR);
 		$query->bindParam(':title', $this->title, PDO::PARAM_STR);
         $query->bindParam(':description', $this->description, PDO::PARAM_STR);
-		$query->bindParam(':created_at', $this->created_at, PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->updated_at, PDO::PARAM_STR);
+        $query->bindParam(':updated_at', $this->updated_at, PDO::PARAM_STR);
         $query->execute();
     }
 

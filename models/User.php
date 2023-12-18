@@ -8,8 +8,8 @@ class User
 	private $db;
 	private $id;
 	private $email;
-	private $created_at;
-	private $updated_at;
+	private $create_at;
+	private $update_at;
     public function __construct()
     {
         // Initialize database connection
@@ -58,14 +58,14 @@ class User
         $this->password = $password;
     }
 
-	public function setCreated_at($created_at)
+	public function setCreate_at($create_at)
 	{
-		$this->created_at = $created_at;
+		$this->create_at = $create_at;
 	}
 
-	public function setUpdated_at($updated_at)
+	public function setUpdate_at($update_at)
 	{
-		$this->updated_at = $updated_at;
+		$this->update_at = $update_at;
 	}
 
 	public function getId()
@@ -87,36 +87,35 @@ class User
         return $this->password;
     }
 
-	public function getCreated_at()
+	public function getCreate_at()
 	{
-		return $this->created_at;
+		return $this->create_at;
 	}
 
-	public function getUpdated_at()
+	public function getUpdate_at()
 	{
-		return $this->updated_at;
+		return $this->update_at;
 	}
 
     public function save()
     {
-        $query = $this->db->prepare('INSERT INTO users (name, email, password, created_at, updated_at) VALUES (:name, :email, :password, :created_at, :updated_at)');
+        $query = $this->db->prepare('INSERT INTO users (name, email, password, created_at, updated_at) VALUES (:name, :email, :password, :create_at, :update_at)');
         $query->bindParam(':name', $this->name, PDO::PARAM_STR);
 		$query->bindParam(':email', $this->email, PDO::PARAM_STR);
         $query->bindParam(':password', $this->password, PDO::PARAM_STR);
-		$query->bindParam(':created_at', $this->created_at, PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->updated_at, PDO::PARAM_STR);
+		$query->bindParam(':create_at', $this->create_at, PDO::PARAM_STR);
+        $query->bindParam(':update_at', $this->update_at, PDO::PARAM_STR);
         $query->execute();
     }
 
     public function update()
     {
-        $query = $this->db->prepare('UPDATE users SET name = :name, email = :email, password = :password, created_at = :created_at, updated_at = :updated_at WHERE id = :id');
+        $query = $this->db->prepare('UPDATE users SET name = :name, email = :email, password = :password, updated_at = :update_at WHERE id = :id');
         $query->bindParam(':id', $this->id, PDO::PARAM_INT);
         $query->bindParam(':name', $this->name, PDO::PARAM_STR);
 		$query->bindParam(':email', $this->email, PDO::PARAM_STR);
         $query->bindParam(':password', $this->password, PDO::PARAM_STR);
-		$query->bindParam(':created_at', $this->created_at, PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->updated_at, PDO::PARAM_STR);
+        $query->bindParam(':update_at', $this->update_at, PDO::PARAM_STR);
         $query->execute();
     }
 

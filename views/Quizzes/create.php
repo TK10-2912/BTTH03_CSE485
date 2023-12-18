@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="lesson_id">Lesson</label>
                 <select class="form-control" name="lesson_id" id="lesson_id" required>
-                    <?php
+                    <!-- <?php
                     $conn = new mysqli("localhost", "root", "", "btth03_cse485");
                     if ($conn->connect_error) {
                         die("Kết nối thất bại: " . $conn->connect_error);
@@ -26,7 +26,7 @@
                         echo "<option value='" . $row['id'] . "'>" . $row['title'] . "</option>";
                     }
                     $conn->close();
-                    ?>
+                    ?> -->
                 </select>
             </div>
 

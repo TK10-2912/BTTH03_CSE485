@@ -23,15 +23,15 @@ class UserController
         $name = $_POST['name'];
 		$email = $_POST['email'];
         $password = $_POST['password'];
-		$created_at = $_POST['created_at'];
-		$updated_at = $_POST['updated_at'];
+		$create_at = $_POST['create_at'];
+		$update_at = $_POST['update_at'];
 
         $user = new User();
         $user->setName($name);
 		$user->setEmail($email);
         $user->setPassword($password);
-		$user->setCreated_at($created_at);
-		$user->setUpdated_at($updated_at);
+		$user->setCreate_at($create_at);
+		$user->setUpdate_at($update_at);
         $user->save();
 
         header('Location: index.php?controller=user&action=index');
@@ -50,12 +50,18 @@ class UserController
     {
         $id = $_POST['id'];
         $name = $_POST['name'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
+        $create_at = $_POST['create_at'];
+        $update_at = $_POST['update_at'];
 
         $user = new User();
         $user->setId($id);
         $user->setName($name);
+        $user->setEmail($email);
         $user->setPassword($password);
+        $user->setCreate_at($create_at);
+        $user->setUpdate_at($update_at);
         $user->update();
 
         header('Location: index.php?controller=user&action=index');

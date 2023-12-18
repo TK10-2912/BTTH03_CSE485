@@ -17,21 +17,6 @@
 
             <div class="form-group">
                 <label for="lesson_id">Lesson</label>
-                <select class="form-control" name="lesson_id" id="lesson_id" required>
-                    <?php
-                    $conn = new mysqli("localhost", "root", "", "btth03_cse485");
-
-                    if ($conn->connect_error) {
-                        die("Kết nối thất bại: " . $conn->connect_error);
-                    }
-                    $result = $conn->query("SELECT id, title FROM lessons");
-                    while ($row = $result->fetch_assoc()) {
-                        $selected = ($row['id'] == $quizze['lesson_id']) ? "selected" : "";
-                        echo "<option value='" . $row['id'] . "' $selected>" . $row['title'] . "</option>";
-                    }
-                    $conn->close();
-                    ?>
-                </select>
             </div>
             <div class="form-group">
                 <label for="title">Title:</label>
