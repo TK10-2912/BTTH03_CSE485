@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1 class="mt-5">Material List</h1>
-        <a class="btn btn-primary mb-3" href="index.php?controller=quizze&action=create">Create Material</a>
+        <a class="btn btn-primary mb-3" href="index.php?controller=material&action=create">Create Material</a>
         <table class="table">
             <thead>
                 <tr>
@@ -35,8 +35,8 @@
                         <td><?php echo $material['created_at']; ?></td>
                         <td><?php echo $material['updated_at']; ?></td>
                         <td>
-                            <a class="btn btn-warning" href="index.php?controller=quizze&action=edit&id=<?php echo $material['id']; ?>">Edit</a>
-                            <a class="btn btn-danger" href="index.php?controller=quizze&action=delete&id=<?php echo $material['id']; ?>">Delete</a>
+                            <a class="btn btn-warning" href="index.php?controller=material&action=edit&id=<?php echo $material['id']; ?>">Edit</a>
+                            <a class="btn btn-danger" href="index.php?controller=material&action=delete&id=<?php echo $material['id']; ?>">Delete</a>
                         </td>
                     </tr>
                 <?php $indexMaterial++;

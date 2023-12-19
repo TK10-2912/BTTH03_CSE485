@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1 class="mt-5">Lessons List</h1>
-        <a class="btn btn-primary mb-3" href="index.php?controller=quizze&action=create">Create Lessons</a>
+        <a class="btn btn-primary mb-3" href="index.php?controller=lesson&action=create">Create Lessons</a>
         <table class="table">
             <thead>
                 <tr>

@@ -8,28 +8,30 @@ class LessonController
     public function index()
     {
         $lessons = Lesson::getAll();
-        require 'views/Lessons/index.php';
+        require 'views/lessons/index.php';
     }
 
     // Display the article creation form
     public function create()
     {
-        require 'views/Lessons/create.php';
+        require 'views/lessons/create.php';
     }
 
     // Store a newly created article in the database
     public function store()
     {
+        $course_id = $_POST['$course_id'];
         $title = $_POST['title'];
 		$description = $_POST['description'];
 		$created_at = $_POST['created_at'];
 		$updated_at = $_POST['updated_at'];
 
         $lesson = new Lesson();
+        $lesson->setCourse_id($course_id);
         $lesson->setTitle($title);
 		$lesson->setDescription($description);
-		$lesson->setCreate_at($created_at);
-		$lesson->setUpdate_at($updated_at);
+		$lesson->setCreated_at($created_at);
+		$lesson->setUpdated_at($updated_at);
         $lesson->save();
 
         header('Location: index.php?controller=lesson&action=index');
@@ -40,13 +42,14 @@ class LessonController
     {
         $id = $_GET['id'];
         $lesson = Lesson::getById($id);
-        require 'views/Lessons/edit.php';
+        require 'views/lessons/edit.php';
     }
 
     // Update the specified article in the database
     public function update()
     {
         $id = $_POST['id'];
+        $course_id = $_POST['$course_id'];
         $title = $_POST['title'];
         $description = $_POST['description'];
 		$created_at = $_POST['created_at'];
@@ -54,10 +57,11 @@ class LessonController
 
         $lesson = new Lesson();
         $lesson->setId($id);
+        $lesson->setCourse_id($course_id);
         $lesson->setTitle($title);
         $lesson->setDescription($description);
-		$lesson->setCreate_at($created_at);
-		$lesson->setUpdate_at($updated_at);
+		$lesson->setCreated_at($created_at);
+		$lesson->setUpdated_at($updated_at);
         $lesson->update();
 
         header('Location: index.php?controller=lesson&action=index');

@@ -7,7 +7,7 @@ class MaterialController
     public function index()
     {
         $materials = Material::getAll();
-        require 'views/material/index.php';
+        require 'views/materials/index.php';
     }
 
     // Display the article creation form
@@ -19,16 +19,18 @@ class MaterialController
     // Store a newly created article in the database
     public function store()
     {
-        $title = $_POST['title'];
         $lesson_id = $_POST['lesson_id'];
-        $create_at = $_POST['create_at'];
-        $update_at = $_POST['update_at'];
+        $title = $_POST['title'];
+        $file_path = $_POST['file_path'];
+        $created_at = $_POST['created_at'];
+        $updated_at = $_POST['updated_at'];
 
         $material = new Material();
-        $material->setTitle($title);
         $material->setLesson_id($lesson_id);
-        $material->setCreate_at($create_at);
-        $material->setUpdate_at($update_at);
+        $material->setTitle($title);
+        $material->setFile_path($file_path);
+        $material->setCreated_at($created_at);
+        $material->setUpdated_at($updated_at);
         $material->save();
 
         header('Location: index.php?controller=material&action=index');
@@ -46,16 +48,18 @@ class MaterialController
     public function update()
     {
         $id = $_POST['id'];
-        $title = $_POST['title'];
         $lesson_id = $_POST['lesson_id'];
-        $create_at = $_POST['create_at'];
-        $update_at = $_POST['update_at'];
+        $title = $_POST['title'];
+        $file_path = $_POST['file_path'];
+        $created_at = $_POST['created_at'];
+        $updated_at = $_POST['updated_at'];
         $material = new Material();
         $material->setId($id);
-        $material->setTitle($title);
         $material->setLesson_id($lesson_id);
-        $material->setCreate_at($create_at);
-        $material->setUpdate_at($update_at);
+        $material->setTitle($title);
+        $material->setFile_path($file_path);
+        $material->setCreated_at($created_at);
+        $material->setUpdated_at($updated_at);
         $material->update();
 
         header('Location: index.php?controller=material&action=index');

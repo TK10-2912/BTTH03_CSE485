@@ -1,15 +1,15 @@
 <?php
-require_once 'config.php';
+require_once(__DIR__ . '/../config.php');
 
 class Material
 {
     private $id;
     private $lesson_id;
-    private $title;
-    private $file_path;
-    private $create_at;
-    private $update_at;
-    private $db;
+	private $title;
+	private $file_path;
+	private $created_at;
+	private $updated_at;
+	private $db;
     public function __construct()
     {
         // Initialize database connection
@@ -22,8 +22,7 @@ class Material
         $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $query = $db->query("SELECT materials.id, materials.title, materials.lesson_id, materials.title, materials.file_path as lesson_title, materials.created_at, materials.updated_at, materials.file_path FROM materials
-        JOIN lessons ON materials.lesson_id = lessons.id");
+        $query = $db->query('SELECT * FROM materials');
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -33,33 +32,89 @@ class Material
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = $db->prepare('SELECT * FROM materials WHERE id = :id');
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':id',$id, PDO::PARAM_INT);
         $query->execute();
 
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
 
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+	public function setLesson_id($lesson_id)
+	{
+		$this->lesson_id = $lesson_id;
+	}
+    public function setFile_path($file_path)
+	{
+		$this->file_path = $file_path;
+	}
+
+	public function setCreated_at($created_at)
+	{
+		$this->created_at = $created_at;
+	}
+
+	public function setUpdated_at($updated_at)
+	{
+		$this->updated_at = $updated_at;
+	}
+
+	public function getId()
+	{
+		return $this->id;
+	}
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+	public function getLesson_id()
+	{
+		return $this->lesson_id;
+	}
+	public function getFile_path()
+	{
+		return $this->file_path;
+	}    
+	public function getCreated_at()
+	{
+		return $this->created_at;
+	}
+
+	public function getUpdated_at()
+	{
+		return $this->updated_at;
+	}
 
     public function save()
     {
-        $query = $this->db->prepare('INSERT INTO materials (id, lesson_id,title, file_path, created_at,updated_at) VALUES (:id, :lesson_id,:title, :file_path :create_at,:update_at)');
-        $query->bindParam(':lesson_id', $this->lesson_id, PDO::PARAM_STR);
-        $query->bindParam(':title', $this->title, PDO::PARAM_STR);
+        $query = $this->db->prepare('INSERT INTO materials (id, lesson_id, title, file_path, created_at, updated_at) VALUES (:id, :lesson_id, :title, :file_path, :created_at, :updated_at)');
+        $query->bindParam(':id', $this->id, PDO::PARAM_STR);
+        $query->bindParam(':lesson_id', $this->title, PDO::PARAM_STR);
+		$query->bindParam(':title', $this->title, PDO::PARAM_STR);
         $query->bindParam(':file_path', $this->file_path, PDO::PARAM_STR);
-        $query->bindParam(':create_at', $this->create_at, PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->update_at, PDO::PARAM_STR);
+		$query->bindParam(':created_at', $this->created_at, PDO::PARAM_STR);
+        $query->bindParam(':updated_at', $this->updated_at, PDO::PARAM_STR);
         $query->execute();
     }
 
     public function update()
     {
-        $query = $this->db->prepare('UPDATE materials SET lesson_id=:lesson_id, title = :title,updated_at = :update_at WHERE id = :id');
-        $query->bindParam(':id', $this->id, PDO::PARAM_INT);
-        $query->bindParam(':lesson_id', $this->lesson_id, PDO::PARAM_STR);
-        $query->bindParam(':title', $this->title, PDO::PARAM_STR);
-        $query->bindParam('file_path', $this->file_path,    PDO::PARAM_STR);
-        $query->bindParam(':update_at', $this->update_at, PDO::PARAM_STR);
+        $query = $this->db->prepare('UPDATE materials SET lesson_id = :lesson_id, title = :title, file_path = :filepath, updated_at = :updated_at WHERE id = :id');
+        $query->bindParam(':id', $this->id, PDO::PARAM_STR);
+        $query->bindParam(':lesson_id', $this->title, PDO::PARAM_STR);
+		$query->bindParam(':title', $this->title, PDO::PARAM_STR);
+        $query->bindParam(':file_path', $this->file_path, PDO::PARAM_STR);
+        $query->bindParam(':updated_at', $this->updated_at, PDO::PARAM_STR);
         $query->execute();
     }
 
@@ -69,104 +124,5 @@ class Material
         $query->bindParam(':id', $this->id, PDO::PARAM_INT);
         $query->execute();
     }
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of lesson_id
-     */ 
-    public function getLesson_id()
-    {
-        return $this->lesson_id;
-    }
-
-    /**
-     * Set the value of lesson_id
-     *
-     * @return  self
-     */ 
-    public function setLesson_id($lesson_id)
-    {
-        $this->lesson_id = $lesson_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of create_at
-     */ 
-    public function getCreate_at()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * Set the value of create_at
-     *
-     * @return  self
-     */ 
-    public function setCreate_at($create_at)
-    {
-        $this->create_at = $create_at;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of update_at
-     */ 
-    public function getUpdate_at()
-    {
-        return $this->update_at;
-    }
-
-    /**
-     * Set the value of update_at
-     *
-     * @return  self
-     */ 
-    public function setUpdate_at($update_at)
-    {
-        $this->update_at = $update_at;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of title
-     */ 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set the value of title
-     *
-     * @return  self
-     */ 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
 }
+?>
