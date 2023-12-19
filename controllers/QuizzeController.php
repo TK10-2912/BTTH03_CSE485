@@ -28,7 +28,7 @@ class QuizzeController
         $quizze->setTitle($title);
         $quizze->setLesson_id($lesson_id);
         $quizze->setCreate_at($create_at);
-        $quizze->setUpdate_at($update_at);
+        $quizze->setUpdate_at($create_at);
         $quizze->save();
 
         header('Location: index.php?controller=quizze&action=index');

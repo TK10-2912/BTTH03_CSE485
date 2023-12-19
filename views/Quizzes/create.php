@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="lesson_id">Lesson</label>
                 <select class="form-control" name="lesson_id" id="lesson_id" required>
-                    <!-- <?php
+                     <?php
                     $conn = new mysqli("localhost", "root", "", "btth03_cse485");
                     if ($conn->connect_error) {
                         die("Kết nối thất bại: " . $conn->connect_error);
@@ -26,7 +26,7 @@
                         echo "<option value='" . $row['id'] . "'>" . $row['title'] . "</option>";
                     }
                     $conn->close();
-                    ?> -->
+                    ?> 
                 </select>
             </div>
 
@@ -34,7 +34,7 @@
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" name="title" id="title" required>
             </div>
-
+            <input type="hidden" name="create_at" value="<?php echo date('Y-m-d H:i:s'); ?>">
             <button type="submit" class="btn btn-primary">Create</button>
             <a class="btn btn-warning" href="index.php?controller=quizze&action=index">Back</a>
 

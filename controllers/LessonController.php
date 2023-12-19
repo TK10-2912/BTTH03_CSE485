@@ -8,13 +8,13 @@ class LessonController
     public function index()
     {
         $lessons = Lesson::getAll();
-        require 'views/lessons/index.php';
+        require 'views/Lessons/index.php';
     }
 
     // Display the article creation form
     public function create()
     {
-        require 'views/lessons/create.php';
+        require 'views/Lessons/create.php';
     }
 
     // Store a newly created article in the database
@@ -40,7 +40,7 @@ class LessonController
     {
         $id = $_GET['id'];
         $lesson = Lesson::getById($id);
-        require 'views/lessons/edit.php';
+        require 'views/Lessons/edit.php';
     }
 
     // Update the specified article in the database
